@@ -1,0 +1,80 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Lambda resource stack creation using Amplify CLI",
+  "Parameters": {
+    "CloudWatchRule": {
+      "Type": "String",
+      "Default": "NONE",
+      "Description": " Schedule Expression"
+    },
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "StateMachine": {
+      "Type" : "AWS::StepFunctions::StateMachine",
+      "Properties" : {
+        "DefinitionString" : "{\n  \"StartAt\": \"No-op\",\n  \"States\": {\n    \"No-op\": {\n      \"Type\": \"Succeed\"}\n  }\n}\n",
+        "RoleArn" : {
+          "Fn::GetAtt": [
+            "StateMachineExecutionRole",
+            "Arn"
+          ]
+        },
+        "StateMachineName" : "SingleOrder",
+        "StateMachineType" : "STANDARD"
+      }
+    },
+    "StateMachineExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "simpleorderStateMachineRole",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "simpleorderStateMachineRole",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+

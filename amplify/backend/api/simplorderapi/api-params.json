@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/order",
+            "lambdaFunction": "simpleorder2e32f9ec",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "simplorderapi",
+    "apiName": "simplorderapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "simpleorder2e32f9ec"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-simpleorder-dev-203830-authRole",
+        "unAuthRoleName": "amplify-simpleorder-dev-203830-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "simpleorder2e32f9ec",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
