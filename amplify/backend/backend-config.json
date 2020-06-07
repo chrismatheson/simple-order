@@ -9,7 +9,17 @@
 		"simpleorder2e32f9ec": {
 			"build": true,
 			"providerPlugin": "awscloudformation",
-			"service": "Lambda"
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "statemachine",
+					"resourceName": "singleorder",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
 		}
 	},
 	"api": {

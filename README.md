@@ -1,3 +1,10 @@
+
+possible build step for additional resources https://docs.amplify.aws/cli/function/build-options
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

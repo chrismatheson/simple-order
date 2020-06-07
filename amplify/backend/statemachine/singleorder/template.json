@@ -75,6 +75,26 @@
         }
       }
     }
+  },
+  "Outputs": {
+    "Name": {
+      "Value": {
+        "Ref": "StateMachine"
+      }
+    },
+    "Arn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "StateMachine",
+          "Arn"
+        ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    }
   }
 }
 
