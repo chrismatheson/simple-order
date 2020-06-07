@@ -1,41 +1,4 @@
 {
-	"statemachine": {
-		"singleorder": {
-			"service": "AWS Step Functions",
-			"providerPlugin": "awscloudformation"
-		}
-	},
-	"function": {
-		"simpleorder2e32f9ec": {
-			"build": true,
-			"providerPlugin": "awscloudformation",
-			"service": "Lambda",
-			"dependsOn": [
-				{
-					"category": "statemachine",
-					"resourceName": "singleorder",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			]
-		}
-	},
-	"api": {
-		"simplorderapi": {
-			"service": "API Gateway",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "simpleorder2e32f9ec",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			]
-		}
-	}
+	"function": {},
+	"api": {}
 }
